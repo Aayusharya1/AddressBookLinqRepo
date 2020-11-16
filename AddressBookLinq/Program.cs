@@ -38,6 +38,10 @@ namespace AddressBookLinq
                         contact.PhoneNumber = Console.ReadLine();
                         Console.WriteLine("Email");
                         contact.Email = Console.ReadLine();
+                        Console.WriteLine("ContactType");
+                        contact.ContactType = Console.ReadLine();
+                        Console.WriteLine("BookName");
+                        contact.BookName = Console.ReadLine();
                         book.InsertContacts(contact);
                         break;
                     case 3:
@@ -58,7 +62,11 @@ namespace AddressBookLinq
                         string PhoneNumber = Console.ReadLine();
                         Console.WriteLine("Email");
                         string Email = Console.ReadLine();
-                        book.EditContact(FirstName, LastName, Address, City, State, ZipCode, PhoneNumber, Email);
+                        Console.WriteLine("ContactType");
+                        string ContactType = Console.ReadLine();
+                        Console.WriteLine("BookName");
+                        string BookName = Console.ReadLine();
+                        book.EditContact(FirstName, LastName, Address, City, State, ZipCode, PhoneNumber, Email, ContactType, BookName);
                         break;
                     case 4:
                         Console.WriteLine("Enter FirstName of contact to be deleted");

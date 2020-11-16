@@ -22,18 +22,20 @@ namespace AddressBookLinq
             dataTable.Columns.Add("ZipCode", typeof(string));
             dataTable.Columns.Add("PhoneNumber", typeof(string));
             dataTable.Columns.Add("EmailID", typeof(string));
+            dataTable.Columns.Add("ContactType", typeof(string));
+            dataTable.Columns.Add("BookName", typeof(string));
 
-            dataTable.Rows.Add("Aayush", "Arya", "Street xyz", "New Delhi", "Delhi", "110000", "9999999999", "aayush@gmail.com");
-            dataTable.Rows.Add("Aayus", "Arya", "Street xyzww", "New Delhi", "Delhi", "110001", "9999999998", "aayus@gmail.com");
-            dataTable.Rows.Add("Aayu", "Arya", "Street xyzqq", "Navi Mumbai", "Mumbai", "210000", "9999999988", "aayu@gmail.com");
-            dataTable.Rows.Add("Aayush", "Ary", "Street abcxyz", "Pilani", "Rajasthan", "310000", "8999999999", "aayush1@gmail.com");
-            dataTable.Rows.Add("Aay", "Arya", "Street xyzop", "New Delhi", "Delhi", "110004", "8899999999", "aay@gmail.com");
+            dataTable.Rows.Add("Aayush", "Arya", "Street xyz", "New Delhi", "Delhi", "110000", "9999999999", "aayush@gmail.com", "friends", "Capg");
+            dataTable.Rows.Add("Aayus", "Arya", "Street xyzww", "New Delhi", "Delhi", "110001", "9999999998", "aayus@gmail.com","profession","Bridgelabz");
+            dataTable.Rows.Add("Aayu", "Arya", "Street xyzqq", "Navi Mumbai", "Mumbai", "210000", "9999999988", "aayu@gmail.com", "family", "Capg");
+            dataTable.Rows.Add("Aayush", "Ary", "Street abcxyz", "Pilani", "Rajasthan", "310000", "8999999999", "aayush1@gmail.com", "profession", "Bridgelabz");
+            dataTable.Rows.Add("Aay", "Arya", "Street xyzop", "New Delhi", "Delhi", "110004", "8899999999", "aay@gmail.com", "friend", "Bridgelabz");
         }
 
 
         public void InsertContacts(Contact contact)
         {
-            dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.Email);
+            dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.Email, contact.ContactType, contact.BookName);
             Console.WriteLine("Contact inserted successfully");
         }
 
@@ -49,7 +51,7 @@ namespace AddressBookLinq
             }
         }
 
-        public void EditContact(string firstName, string lastName, string address, string city, string state, string zipcode, string phoneNumber, string email)
+        public void EditContact(string firstName, string lastName, string address, string city, string state, string zipcode, string phoneNumber, string email, string contactType, string bookName)
         {
             var recordedData = dataTable.AsEnumerable().Where(x => x.Field<string>("FirstName") == firstName).FirstOrDefault();
             if (recordedData != null)
@@ -60,7 +62,9 @@ namespace AddressBookLinq
                 recordedData.SetField("State", state);
                 recordedData.SetField("ZipCode", zipcode);
                 recordedData.SetField("EmailID", email);
-                recordedData.SetField("State", state);
+                recordedData.SetField("PhoneNumber", phoneNumber);
+                recordedData.SetField("ContactType", contactType);
+                recordedData.SetField("BookName", bookName);
                 Console.WriteLine("Contact edited successfully");
             }
             else
