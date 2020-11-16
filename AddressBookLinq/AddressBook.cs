@@ -138,5 +138,14 @@ namespace AddressBookLinq
             }
         }
 
+        public void CountContactsByContactType()
+        {
+            var records = dataTable.AsEnumerable().GroupBy(x => x.Field<string>("ContactType")).Select(x => new { ContactType = x.Key, Count = x.Count() });
+            foreach (var row in records)
+            {
+                Console.WriteLine(row.ContactType + "\t" + row.Count);
+            }
+        }
+
     }
 }
