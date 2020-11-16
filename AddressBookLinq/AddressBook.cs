@@ -21,18 +21,51 @@ namespace AddressBookLinq
             dataTable.Columns.Add("ZipCode", typeof(string));
             dataTable.Columns.Add("PhoneNumber", typeof(string));
             dataTable.Columns.Add("EmailID", typeof(string));
-        }
-        /// <summary>
-        /// Insert Contacts in a the addressBook
-        /// </summary>
-        public void InsertContacts()
-        {
-            
+
             dataTable.Rows.Add("Aayush", "Arya", "Street xyz", "New Delhi", "Delhi", "110000", "9999999999", "aayush@gmail.com");
             dataTable.Rows.Add("Aayus", "Arya", "Street xyzww", "New Delhi", "Delhi", "110001", "9999999998", "aayus@gmail.com");
             dataTable.Rows.Add("Aayu", "Arya", "Street xyzqq", "Navi Mumbai", "Mumbai", "210000", "9999999988", "aayu@gmail.com");
             dataTable.Rows.Add("Aayush", "Ary", "Street abcxyz", "Pilani", "Rajasthan", "310000", "8999999999", "aayush1@gmail.com");
             dataTable.Rows.Add("Aay", "Arya", "Street xyzop", "New Delhi", "Delhi", "110004", "8899999999", "aay@gmail.com");
+        }
+
+
+        public void InsertContacts(Contact contact)
+        {
+            dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.Email);
+            Console.WriteLine("Contact inserted successfully");
+        }
+
+        public void DisplayAddressBook()
+        {
+            foreach (DataRow row in dataTable.Rows)
+            {
+                foreach (DataColumn col in dataTable.Columns)
+                {
+                    Console.Write(row[col] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public void EditContact(string firstName, string lastName, string address, string city, string state, string zipcode, string phoneNumber, string email)
+        {
+            var recordedData = dataTable.AsEnumerable().Where(x => x.Field<string>("FirstName") == firstName).FirstOrDefault();
+            if (recordedData != null)
+            {
+                recordedData.SetField("LastName", lastName);
+                recordedData.SetField("Address", address);
+                recordedData.SetField("City", city);
+                recordedData.SetField("State", state);
+                recordedData.SetField("ZipCode", zipcode);
+                recordedData.SetField("EmailID", email);
+                recordedData.SetField("State", state);
+                Console.WriteLine("Contact edited successfully");
+            }
+            else
+            {
+                Console.WriteLine("No Contact Found");
+            }
         }
 
     }
