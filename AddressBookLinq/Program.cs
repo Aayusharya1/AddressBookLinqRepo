@@ -12,7 +12,7 @@ namespace AddressBookLinq
             book.CreateAddressBook();
             while (loop == 1)
             {
-                Console.WriteLine("Make choice according to your desired operation \n1. Display Address book \n2. Insert Contact \n3. Edit Contact \n4. Delete Contact \n5. Exit");
+                Console.WriteLine("Make choice according to your desired operation \n1. Display Address book \n2. Insert Contact \n3. Edit Contact \n4. Delete Contact \n5. Retrieve contacts by city \n6. Retrieve Contacts by state \n7. Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -66,6 +66,16 @@ namespace AddressBookLinq
                         book.DeleteContact(name);
                         break;
                     case 5:
+                        Console.WriteLine("Enter City");
+                        string city = Console.ReadLine();
+                        book.RetrieveContactsByCity(city);
+                        break;
+                    case 6:
+                        Console.WriteLine("Enter State");
+                        string state = Console.ReadLine();
+                        book.RetrieveContactsByState(state);
+                        break;
+                    case 7:
                         loop = 0;
                         break;
                 }
